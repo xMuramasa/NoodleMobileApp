@@ -47,7 +47,7 @@ $(document).ready(function(){
     let settingsGET = {
         "async": true,
         "crossDomain": true,
-        "url": "http://localhost:8000/cliente/getAll",
+        "url": "https://noodle-project-anal.herokuapp.com/cliente/getAll",
         "method": "GET",
         "headers": {
             "Content-Type": "application/json",
@@ -124,7 +124,7 @@ $(document).ready(function(){
                 //check if user in NOT database
                 if (!flag){
                         $.ajax({
-                            url: 'http://localhost:8000/cliente/cliente',
+                            url: 'https://noodle-project-anal.herokuapp.com/cliente/cliente',
                             type: 'POST',
                             data: JSON.stringify({
                                 nombre: userReg.val(),
@@ -174,7 +174,7 @@ $(document).ready(function(){
             let date = new Date();
             $.ajax({
                 type: "POST",
-                url: "http://localhost:8000/consulta/consulta",// api url
+                url: "https://noodle-project-anal.herokuapp.com/consulta/consulta",// api url
                 data: JSON.stringify({ titulo: title.val(), descripcion: descrip.val(), 
                     fecha_hora: date.toDateString(), usuarioId: usrId,}),
                 dataType: 'json',
