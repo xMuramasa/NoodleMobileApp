@@ -6,7 +6,7 @@ $(document).ready(function () {
     //variable del nav
     let nav = $("#nav");
     let home = $("#homeButton");
-    let qCreate = $("#queryCreate");
+    let qCreate = $("#MakeQuery");
 
     //variabes de consultas
     let query = $("#queries");
@@ -18,7 +18,7 @@ $(document).ready(function () {
     let settingsGET = {
         "async": true,
         "crossDomain": true,
-        "url": "https://noodle-project-anal.herokuapp.com/cliente/getAll",
+        "url": " https://localhost:8000/cliente/getAll",
         "method": "GET",
         "headers": {
             "Content-Type": "application/json",
@@ -31,24 +31,25 @@ $(document).ready(function () {
     query.submit(function (e) {//yay
         e.preventDefault();
         if ((title.val() !== "") && (descrip.val() !== "")) {
-            getID();
+            // https://noodle-project-anal.herokuapp.com
             let date = new Date();
             $.ajax({
                 type: "POST",
-                url: "https://noodle-project-anal.herokuapp.com/consulta/consulta",// api url
+                url: " https://localhost:8000/consulta/consulta",// api url
                 data: JSON.stringify({
                     titulo: title.val(), descripcion: descrip.val(),
-                    fecha_hora: date.toDateString(), usuarioId: usrId,
+                    fecha_hora: date.toDateString(), usuarioId: 1,//window.localStorage.getItem("token"),
                 }),
                 dataType: 'json',
                 contentType: "application/json",
                 success: function (data) {
+                    alert("good");
                     console.log(JSON.stringify({
                         titulo: title.val(), descripcion: descrip.val(),
-                        fecha_hora: date.toDateString(), usuarioId: usrId,
+                        fecha_hora: date.toDateString(), usuarioId: window.localStorage.getItem("token"),
                     }));
                 },
-                failure: function (errMsg) { console.log("lmao") }
+                failure: function (errMsg) { alert("lmao") }
             });
             nav.append("<h6 style='color: black; font - size: 2.5em; text-align: center'><br>Cosulta Realizada</h6>");
             query.fadeOut();
@@ -67,8 +68,6 @@ $(document).ready(function () {
     });
 
 
-    query.hide();
-    register.hide();
+    
     nav.hide();
-    chat.hide();
 })

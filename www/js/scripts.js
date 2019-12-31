@@ -35,7 +35,7 @@ $(document).ready(function(){
     let settingsGET = {
         "async": true,
         "crossDomain": true,
-        "url": "https://noodle-project-anal.herokuapp.com/cliente/getAll",
+        "url": "http://localhost:8000/cliente/getAll",
         "method": "GET",
         "headers": {
             "Content-Type": "application/json",
@@ -43,7 +43,6 @@ $(document).ready(function(){
         "processData": true,
         "data": ""
     }
-
     register.fadeOut();
 //////////////////////////////////////////// Begin Login & Registro
     //funcion de login
@@ -66,8 +65,6 @@ $(document).ready(function(){
                 // esta wea es la raja
                 if (flag){
                     // cambio de estado de la pagina
-                    alert('usrId: '+usrId);
-
                     console.log(JSON.stringify({
                         nombre: userLogin.val(),
                         pass: passLogin.val(),
@@ -118,7 +115,7 @@ $(document).ready(function(){
                 //check if user in NOT database
                 if (!flag){
                     $.ajax({
-                        url: 'https://noodle-project-anal.herokuapp.com/cliente/cliente',
+                        url: 'http://localhost:8000/cliente/cliente',
                         type: 'POST',
                         data: JSON.stringify({
                             nombre: userReg.val(),
@@ -127,7 +124,7 @@ $(document).ready(function(){
                         dataType: 'json',
                         contentType: "application/json",
                         success: function (data) {
-                            console.log('Data: ' + userReg.val() +''+passReg.val());
+                            alert('Data: ' + userReg.val() +''+passReg.val());
                             window.localStorage.setItem("name", userReg.val());
                             window.location.href = "/menu.html";
                             register.fadeOut();
