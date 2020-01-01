@@ -13,6 +13,7 @@ $(document).ready(function(){
     let register = $("#register"); 
     let userReg = $("#userReg");
     let passReg = $("#passReg");
+    let tecnico = $("#tecnico");
     let user2 = { nombre: userReg.val(), pass: passReg.val() };
 
     //session
@@ -92,6 +93,7 @@ $(document).ready(function(){
     redirReg.submit(function (e) {
         e.preventDefault();
         login.fadeOut();
+        $("#tecIndex").fadeOut();
         redirReg.fadeOut();
         register.fadeIn();
     });
@@ -146,5 +148,12 @@ $(document).ready(function(){
         }
     });
 //////////////////////////////////////////// End Login & Registro
+
+    tecnico.submit(function (e){
+        e.preventDefault();
+        window.location.href = "/tecnico.html";
+
+    })
+
 
 });

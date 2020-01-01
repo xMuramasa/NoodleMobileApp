@@ -74,16 +74,12 @@ $(document).ready(function () {
         }
     });
 
-
    home.click(function () {
-       alert("home")
        $("#form").fadeOut();
     });
 
     chat.click(function () {
-        alert("chat")
         window.location.href = "/messages.html";
-        $("#form").fadeOut();
     });
 
 
