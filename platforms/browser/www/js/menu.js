@@ -1,11 +1,11 @@
 $(document).ready(function () {
 
     //variables del chat
-    let chat = $("#chat");
+    let chat = $("#MessagesButton");
 
     //variable del nav
     let nav = $("#nav");
-    let home = $("#homeButton");
+    let home = $("#HomeButton");
     let qCreate = $("#MakeQuery");
 
     //variabes de consultas
@@ -57,7 +57,7 @@ $(document).ready(function () {
                 data: JSON.stringify({
                     titulo: title.val(), descripcion: descrip.val(),
                     fecha_hora: date.toDateString().toLowerCase(), 
-                    usuarioId: parseInt(usrId,10),
+                    usuarioId: Number(parseFloat(usrId)),
                 }),
                 dataType: 'json',
                 contentType: "application/json",
@@ -74,17 +74,22 @@ $(document).ready(function () {
         }
     });
 
-    nav.submit(function (e) {
 
-        e.preventDefault();
-        if (qCreate) {
-            query.fadeIn();
-        }
-        if (home) {
-            $("#form").fadeOut();
-        }
+   home.click(function () {
+       alert("home")
+       $("#form").fadeOut();
     });
 
+    chat.click(function () {
+        alert("chat")
+        window.location.href = "/messages.html";
+        $("#form").fadeOut();
+    });
+
+
+    qCreate.click(function () {
+        query.fadeIn();
+    });
 
     
     nav.hide();
