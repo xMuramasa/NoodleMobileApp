@@ -93,7 +93,7 @@ $(document).ready(function(){
     redirReg.submit(function (e) {
         e.preventDefault();
         login.fadeOut();
-        $("#tecIndex").fadeOut();
+        tecnico.fadeOut();
         redirReg.fadeOut();
         register.fadeIn();
     });
