@@ -71,6 +71,7 @@ $(document).ready(function(){
                     }),);
                     window.localStorage.setItem("token", usrId);
                     window.localStorage.setItem("name", userLogin.val());
+                    window.localStorage.setItem("pass", passLogin.val());
 
                     window.location.href = "/menu.html";
                     login.fadeOut();
@@ -124,8 +125,9 @@ $(document).ready(function(){
                         dataType: 'json',
                         contentType: "application/json",
                         success: function (data) {
-                            alert('Data: ' + userReg.val() +''+passReg.val());
+                            window.localStorage.setItem("token","");
                             window.localStorage.setItem("name", userReg.val());
+                            window.localStorage.setItem("pass", passReg.val());
                             window.location.href = "/menu.html";
                             register.fadeOut();
                         },

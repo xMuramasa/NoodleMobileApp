@@ -15,10 +15,10 @@ $(document).ready(function () {
 
 
     // settings de postman para get, con esto funciona sin problemas
-    let settingsGET = {
+    let settingsGETall = {
         "async": true,
         "crossDomain": true,
-        "url": " https://localhost:8000/cliente/getAll",
+        "url": "http://localhost:8000/cliente/getAll",
         "method": "GET",
         "headers": {
             "Content-Type": "application/json",
@@ -27,6 +27,24 @@ $(document).ready(function () {
         "data": ""
     }
 
+    let usrId = "";
+    let getID = function () {
+        $.ajax(settingsGETall).done(function (response) {
+            // this is pretty hardcore lmao; 
+            //se trunca la tabal del json en id, porque este no se necesita
+            response.forEach(element => {
+                if (window.localStorage.getItem("token") === ""){
+                    if ((element["nombre"] === window.localStorage.getItem("name")) && 
+                    (element["pass"] === window.localStorage.getItem("pass"))) {
+                        usrId = element["id"];
+                        parseInt(usrId, 10);
+                        window.localStorage.setItem("token", usrId);
+                    }
+                }
+            });
+        })
+    }
+    getID();
 
     query.submit(function (e) {//yay
         e.preventDefault();
@@ -35,18 +53,18 @@ $(document).ready(function () {
             let date = new Date();
             $.ajax({
                 type: "POST",
-                url: " https://localhost:8000/consulta/consulta",// api url
+                url: "http://localhost:8000/consulta/consulta",// api url
                 data: JSON.stringify({
                     titulo: title.val(), descripcion: descrip.val(),
-                    fecha_hora: date.toDateString(), usuarioId: 1,//window.localStorage.getItem("token"),
+                    fecha_hora: date.toDateString().toLowerCase(), 
+                    usuarioId: parseInt(usrId,10),
                 }),
                 dataType: 'json',
                 contentType: "application/json",
                 success: function (data) {
-                    alert("good");
                     console.log(JSON.stringify({
                         titulo: title.val(), descripcion: descrip.val(),
-                        fecha_hora: date.toDateString(), usuarioId: window.localStorage.getItem("token"),
+                        fecha_hora: date, usuarioId: window.localStorage.getItem("token"),
                     }));
                 },
                 failure: function (errMsg) { alert("lmao") }
