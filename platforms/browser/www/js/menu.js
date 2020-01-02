@@ -21,6 +21,7 @@ $(document).ready(function () {
         "url": "http://localhost:8000/cliente/getAll",
         "method": "GET",
         "headers": {
+            'Access-Control-Allow-Origin':'*',
             "Content-Type": "application/json",
         },
         "processData": true,
@@ -76,7 +77,7 @@ $(document).ready(function () {
     });
 
     chat.click(function () {
-        window.location.href = "/messages.html";
+        window.location.href = "/consultas.html";
     });
 
 

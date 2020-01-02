@@ -1,59 +1,3 @@
-//variables del chat
-let chat = $("#chat");
-
-//variable del nav
-let nav = $("#nav");
-let home = $("#HomeButton");
-let qCreate = $("#MakeQuery");
-
-//variabes de consultas
-let query = $("#queries");
-let title = $("#title");
-let descrip = $("#descrip");
-
-var ultimoMensaje = 0;
-
-chat.fadeOut();
-
-
-
-
-//////////////////// get consultas
-$.ajax({
-    type: "GET",
-    url: "http://localhost:8000/consulta/consultas",
-    contentType: 'application/json',
-    dataType: 'json',
-    cache: false,
-    success: function (respuesta) {
-        console.log(respuesta);
-        for (var i = 0; i < respuesta.length; i++) {
-            $("#consultas").append('                                                     \
-                    <div class="card">                                                       \
-                        <div class="card-body">                                              \
-                            <h5 class="card-title">Consulta '+ respuesta[i].id + '</h5>         \
-                            <p class="card-text">Cliente: '+ respuesta[i].cliente + '</p>    \
-                            <p class="card-text">Técnico: '+ respuesta[i].tecnico + '</p>    \
-                            <a href="/chat.html" onclick="setConsulta('+ respuesta[i].id + ')"\
-                            class="btn btn-primary">Ir al Chat</a>                           \
-                        </div>                                                               \
-                    </div>                                                                   \
-                ');
-        }
-    },
-    error: function () {
-        console.log("No se ha podido obtener la información");
-    }
-});
-
-function setConsulta(idConsulta) {
-    window.localStorage.setItem('consulta', idConsulta.toString());
-}
-
-
-/////////////////////End get consultas
-
-
 
 
 ////////////////////// get mensajes y chat
@@ -77,22 +21,22 @@ function descargarChats() {
             for (var i = respuesta.length - 1; i >= 0; i--) {
                 if (respuesta[i].emisor == 1) {
                     $("#chat").prepend('                                                                      \
-                        <div class="col-8 card float-left">                                                                   \
-                            <div class="card-body">                                                          \
-                                <h5 class="card-title">Tú</h5> \
-                                <p class="card-text">'+ respuesta[i].mensaje + '</p>                         \
-                            </div>                                                                           \
-                        </div>                                                                               \
-                    ');
+                            <div class="col-8 card float-left">                                                                   \
+                                <div class="card-body">                                                          \
+                                    <h5 class="card-title">Tú</h5> \
+                                    <p class="card-text">'+ respuesta[i].mensaje + '</p>                         \
+                                </div>                                                                           \
+                            </div>                                                                               \
+                        ');
                 } else {
                     $("#chat").prepend('                                                                      \
-                        <div class="col-8 card float-right">                                                                   \
-                            <div class="card-body">                                                          \
-                                <h5 class="card-title">Técnico</h5> \
-                                <p class="card-text">'+ respuesta[i].mensaje + '</p>                         \
-                            </div>                                                                           \
-                        </div>                                                                               \
-                    ');
+                            <div class="col-8 card float-right">                                                                   \
+                                <div class="card-body">                                                          \
+                                    <h5 class="card-title">Técnico</h5> \
+                                    <p class="card-text">'+ respuesta[i].mensaje + '</p>                         \
+                                </div>                                                                           \
+                            </div>                                                                               \
+                        ');
                 }
             }
         },
