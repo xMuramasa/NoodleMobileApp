@@ -21,9 +21,6 @@ $(document).ready(function () {
 
     var usrId = parseInt(window.localStorage.getItem("token"),10);
 
-    chat.hide()
-
-
     let settingsGetConsultas = {
         "async": true,
         "crossDomain": true,
