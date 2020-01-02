@@ -36,8 +36,7 @@ $(document).ready(function () {
                 if (window.localStorage.getItem("token") === ""){
                     if ((element["nombre"] === window.localStorage.getItem("name")) && 
                     (element["pass"] === window.localStorage.getItem("pass"))) {
-                        usrId = element["id"];
-                        parseInt(usrId, 10);
+                        usrId = parseInt(element["id"], 10);
                         window.localStorage.setItem("token", usrId);
                     }
                 }
@@ -51,23 +50,21 @@ $(document).ready(function () {
         if ((title.val() !== "") && (descrip.val() !== "")) {
             // https://noodle-project-anal.herokuapp.com
             let date = new Date();
+            usrId = parseInt(window.localStorage.getItem("token"), 10);
             $.ajax({
                 type: "POST",
                 url: "http://localhost:8000/consulta/consulta",// api url
                 data: JSON.stringify({
                     titulo: title.val(), descripcion: descrip.val(),
-                    fecha_hora: date.toDateString().toLowerCase(), 
-                    usuarioId: Number(parseFloat(usrId)),
+                    fecha: date.toDateString(), 
+                    usuarioId: usrId,
                 }),
                 dataType: 'json',
                 contentType: "application/json",
                 success: function (data) {
-                    console.log(JSON.stringify({
-                        titulo: title.val(), descripcion: descrip.val(),
-                        fecha_hora: date, usuarioId: window.localStorage.getItem("token"),
-                    }));
+                    console.log("xd");
                 },
-                failure: function (errMsg) { alert("lmao") }
+                failure: function (errMsg) { console.log("lmao") }
             });
             nav.append("<h6 style='color: black; font - size: 2.5em; text-align: center'><br>Cosulta Realizada</h6>");
             query.fadeOut();
