@@ -19,16 +19,11 @@ $(document).ready(function () {
     var chat = $("#chat");
 
     //variable del nav
-    var nav = $("#nav");
     var home = $("#HomeButton");
     var qCreate = $("#MakeQuery");
 
     //variabes de consultas
-    var query = $("#queries");
-    var title = $("#title");
-    var descrip = $("#descrip");
-
-    var consultas = $("#consultas");
+    var consultas = $("#MessagesButton");
 
     var formChat = $("#formm");
     var descrip = $("#descrip");
@@ -69,8 +64,8 @@ $(document).ready(function () {
 
     });
 
-    chat.click(function () {
-        window.location.href = "/messages.html";
+    consultas.click(function () {
+        window.location.href = "/consultas.html";
     });
 
     qCreate.click(function () {
