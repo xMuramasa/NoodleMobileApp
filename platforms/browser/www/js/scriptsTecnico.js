@@ -74,6 +74,8 @@ $(document).ready(function () {
                     window.localStorage.setItem("token", usrId);
                     window.localStorage.setItem("name", userLogin.val());
                     window.localStorage.setItem("pass", passLogin.val());
+                    window.localStorage.setItem("type", 1);
+
 
                     window.location.href = "/menu.html";
                     login.fadeOut();
@@ -131,6 +133,8 @@ $(document).ready(function () {
                             window.localStorage.setItem("token", "");
                             window.localStorage.setItem("name", userReg.val());
                             window.localStorage.setItem("pass", passReg.val());
+                            window.localStorage.setItem("type", 1);
+
                             window.location.href = "/menu.html";
                             register.fadeOut();
                         },
