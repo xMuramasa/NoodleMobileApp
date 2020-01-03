@@ -7,7 +7,6 @@ $(document).ready(function () {
     //variable del nav
     let nav = $("#nav");
     let home = $("#HomeButton");
-    let qCreate = $("#MakeQuery");
 
     //variabes de consultas
     let query = $("#queries");
@@ -37,19 +36,18 @@ $(document).ready(function () {
     //////////////////// get consultas
     $.ajax(settingsGetConsultas).done(function(respuesta){
             respuesta.forEach(element => {
-                if(element["usuarioId"] === usrId){
-                    consultas.append(' <br>                                                    \
+                if(element["tecnicoId"] === usrId){
+                    consultastecnico.append(' <br>                                           \
                     <div class="card">                                                       \
                         <div class="card-body">                                              \
-                            <h5 class="card-title">Consulta '+ element["titulo"] + '</h5>         \
+                            <h5 class="card-title">Consulta '+ element["titulo"] + '</h5>    \
                             <p class="card-text">Cliente: '+ element["usuarioId"] + '</p>    \
-                            <p class="card-text">Técnico: '+ element["tecnicoId"] + '</p>    \
                             <a href="/messages.html" onclick="setConsulta('+ element["consultaId"] + ')"\
                             class="btn btn-primary">Ir al Chat</a>                           \
                         </div>                                                               \
                     </div>                                                                   \
                 ');
-                }           
+                }
             });
     });
 
@@ -60,14 +58,11 @@ $(document).ready(function () {
     });
 
     chat.click(function () {
-        window.location.href = "/messages.html";
+        window.location.href = "/messagestecnico.html";
     });
 
-    qCreate.click(function () {
-        window.location.href = "/menu.html";
-    });
 });
 
 function setConsulta(idConsulta) {
-    window.localStorage.setItem('consulta', idConsulta.toString());
+    window.localStorage.setItem('consultatecnico', idConsulta.toString());
 }
