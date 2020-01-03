@@ -77,7 +77,7 @@ $(document).ready(function () {
                     window.localStorage.setItem("type", 1);
 
 
-                    window.location.href = "/menu.html";
+                    window.location.href = "/menuTecnico.html";
                     login.fadeOut();
                     redirReg.fadeOut();
                     nav.fadeIn();
@@ -121,7 +121,7 @@ $(document).ready(function () {
                 //check if user in NOT database
                 if (!flag) {
                     $.ajax({
-                        url: 'http://localhost:8000/tecnico/',
+                        url: 'http://localhost:8000/tecnico/tecnico',
                         type: 'POST',
                         data: JSON.stringify({
                             nombre: userReg.val(),
@@ -135,7 +135,7 @@ $(document).ready(function () {
                             window.localStorage.setItem("pass", passReg.val());
                             window.localStorage.setItem("type", 1);
 
-                            window.location.href = "/menu.html";
+                            window.location.href = "/menuTecnico.html";
                             register.fadeOut();
                         },
                         error: function (request, error) {
