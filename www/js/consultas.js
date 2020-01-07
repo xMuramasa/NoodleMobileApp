@@ -36,7 +36,8 @@ $(document).ready(function () {
 
     ///////////////////// get consultas
     $.ajax(settingsGetConsultas).done(function(respuesta){
-            respuesta.forEach(element => {
+            var rev = respuesta.reverse();
+            rev.forEach(element => {
                 if(element["usuarioId"] === usrId){
                     if(element["tecnicoId"] === -1){
                         consultas.append(' <br>                                                    \
