@@ -34,26 +34,43 @@ $(document).ready(function () {
     }
 
 
-    //////////////////// get consultas
+    ///////////////////// get consultas
     $.ajax(settingsGetConsultas).done(function(respuesta){
             respuesta.forEach(element => {
                 if(element["usuarioId"] === usrId){
-                    consultas.append(' <br>                                                    \
-                    <div class="card">                                                       \
-                        <div class="card-body">                                              \
-                            <h5 class="card-title">Consulta '+ element["titulo"] + '</h5>         \
-                            <p class="card-text">Cliente: '+ element["usuarioId"] + '</p>    \
-                            <p class="card-text">Técnico: '+ element["tecnicoId"] + '</p>    \
-                            <a href="/messages.html" onclick="setConsulta('+ element["consultaId"] + ')"\
-                            class="btn btn-primary">Ir al Chat</a>                           \
-                        </div>                                                               \
-                    </div>                                                                   \
-                ');
+                    if(element["tecnicoId"] === -1){
+                        consultas.append(' <br>                                                    \
+                            <div class="card">                                                       \
+                                <div class="card-body">                                              \
+                                    <h5 class="card-title">Consulta ' + element["titulo"] + '</h5><h5 style="color:red"> Sin Responder </h5>         \
+                                    <p class = "card-text" >Fecha: ' + element["fecha"] + '</p>    \
+                                    <p class="card-text">Cliente: ' + element["usuarioId"] + '</p>    \
+                                    <p class="card-text">Técnico: ' + element["tecnicoId"] + '</p>    \
+                                    <a href="/messages.html" onclick="setConsulta(' + element["consultaId"] + ')"\
+                                    class="btn btn-primary">Ir al Chat</a>                           \
+                                </div>                                                               \
+                            </div>                                                                   \
+                        ');
+                    }
+                    else{
+                        consultas.append(' <br>                                                    \
+                            <div class="card">                                                       \
+                                <div class="card-body">                                              \
+                                    <h5 class="card-title">Consulta ' + element["titulo"] + '</h5><h5 style="color:green">  Respondida </h5>         \
+                                    <p class="card-text">Fecha: ' + element["fecha"] + '</p>    \
+                                    <p class="card-text">Cliente: ' + element["usuarioId"] + '</p>    \
+                                    <p class="card-text">Técnico: ' + element["tecnicoId"] + '</p>    \
+                                    <a href="/messages.html" onclick="setConsulta(' + element["consultaId"] + ')"\
+                                    class="btn btn-primary">Ir al Chat</a>                           \
+                                </div>                                                               \
+                            </div>                                                                   \
+                        ');
+                    }
                 }           
             });
     });
 
-    /////////////////////End get consultas
+    ///////////////////// End get consultas
 
     home.click(function () {
         window.location.href = "/menu.html";

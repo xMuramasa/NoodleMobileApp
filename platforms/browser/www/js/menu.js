@@ -57,8 +57,9 @@ $(document).ready(function () {
                 url: "http://localhost:8000/consulta/consulta",// api url
                 data: JSON.stringify({
                     titulo: title.val(), descripcion: descrip.val(),
-                    fecha: date.toDateString(), 
+                    fecha: date.toDateString(),
                     usuarioId: usrId,
+                    tecnicoId: -1,
                 }),
                 dataType: 'json',
                 contentType: "application/json",
