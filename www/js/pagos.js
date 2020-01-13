@@ -10,6 +10,16 @@ var settingsGetPagos = {
     "data": ""
 }
 
+var settingsDel = {
+    "url": "http://localhost:8000/consulta/consulta/" + window.localStorage["consulta"],
+    "method": "DELETE",
+    "timeout": 0,
+    "headers": {
+        "Content-Type": "application/json"
+    },
+    "data": "",
+};
+
 
 ////////////////////// pagos
 $(document).ready(function () {
@@ -67,6 +77,9 @@ $(document).ready(function () {
             dataType: 'json',
             cache: false,
             success: function (respuesta) {
+                $.ajax(settingsDel).done(function (response) {
+                    console.log(response);
+                });
                 window.location.href = "/consultas.html";
 
             },
