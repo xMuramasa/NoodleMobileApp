@@ -15,9 +15,6 @@ $(document).ready(function () {
 
     let consultas = $("#consultasclientes");
 
-    var ultimoMensaje = 0;
-
-
     var usrId = parseInt(window.localStorage.getItem("token"),10);
 
     let settingsGetConsultas = {
@@ -35,26 +32,26 @@ $(document).ready(function () {
 
     //////////////////// get consultas
     $.ajax(settingsGetConsultas).done(function(respuesta){
-            respuesta.forEach(element => {
-                if(element["tecnicoId"] === usrId){
-                    consultas.append(' <br>                                           \
-                    <div class="card">                                                       \
-                        <div class="card-body">                                              \
-                            <h5 class="card-title">Consulta '+ element["titulo"] + '</h5>    \
-                            <p class="card-text">Cliente: '+ element["usuarioId"] + '</p>    \
-                            <a href="/messages.html" onclick="setConsulta('+ element["consultaId"] + ')"\
-                            class="btn btn-primary">Ir al Chat</a>                           \
-                        </div>                                                               \
-                    </div>                                                                   \
-                ');
-                }
-            });
+        respuesta.forEach(element => {
+            if(element["tecnicoId"] === usrId){
+                consultas.append(' <br>                                           \
+                <div class="card">                                                       \
+                    <div class="card-body">                                              \
+                        <h5 class="card-title">Consulta '+ element["titulo"] + '</h5>    \
+                        <p class="card-text">Cliente: '+ element["usuarioId"] + '</p>    \
+                        <a href="/messages.html" onclick="setConsulta('+ element["consultaId"] + ')"\
+                        class="btn btn-primary">Ir al Chat</a>                           \
+                    </div>                                                               \
+                </div>                                                                   \
+            ');
+            }
+        });
     });
 
     /////////////////////End get consultas
 
     home.click(function () {
-        window.location.href = "/menu.html";
+        window.location.href = "/menuTecnico.html";
     });
 
     chat.click(function () {
@@ -64,5 +61,5 @@ $(document).ready(function () {
 });
 
 function setConsulta(idConsulta) {
-    window.localStorage.setItem('consultatecnico', idConsulta.toString());
+    window.localStorage.setItem('consulta', idConsulta.toString());
 }

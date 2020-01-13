@@ -6,7 +6,7 @@ $(document).ready(function () {
 
     //variables de consultas
     let query = $("#queries");
-    let title = $("#title");
+    let title = $("#MessagesButton");
     let descrip = $("#descrip");
 
     let consultasClientes = $("#consultasclientes");
@@ -22,6 +22,14 @@ $(document).ready(function () {
         "processData": true,
         "data": ""
     }
+
+    home.click(function () {
+        window.location.href = "/menuTecnico.html";
+    });
+
+    title.click(function () {
+        window.location.href = "/consultastecnico.html";
+    });
 
     //////////////////// get consultas
     $.ajax(settingsGetConsultas).done(function(respuesta){
