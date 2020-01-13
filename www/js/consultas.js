@@ -65,7 +65,7 @@ $(document).ready(function () {
                                 <p class="card-text">Técnico: ' + element["tecnicoId"] + '</p>    \
                                 <a href="/messages.html" onclick="setConsulta(' + element["consultaId"] + ')"\
                                 class="btn btn-primary">Ir al Chat</a>                           \
-                                <a href="/pagos.html" onclick="pagos(' + element["consultaId"] + ')"\
+                                <a href="/pagos.html" onclick="setConsulta(' + element["consultaId"] + ')"\
                                 class="btn btn-primary">Terminar Consulta y Pagar</a>            \
                             </div>                                                               \
                         </div>                                                                   \
@@ -92,9 +92,5 @@ $(document).ready(function () {
 });
 
 function setConsulta(idConsulta) {
-    window.localStorage.setItem('consulta', idConsulta.toString());
-}
-
-function pagos(idConsulta) {
-    window.localStorage.setItem('consulta', idConsulta.toString());
+    window.localStorage.setItem("consulta", idConsulta);
 }
