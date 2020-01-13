@@ -9,7 +9,7 @@
 
 <body background="img/lmao.jpeg">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">DangerNoodleMobile Chat</a>
+        <a class="navbar-brand" href="#">DangerNoodleMobile Pagos</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -27,23 +27,25 @@
                         Consultas
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <button class="dropdown-item" href="#" id="ClientQueries">Ver consultas</button>
-                            <div class="dropdown-divider"></div>
-                            <button class="dropdown-item" href="#" id="MessagesButton">Consultas activas y Mensajes</button>
+                        <button class="dropdown-item" href="#" id="MakeQuery">Hacer Consulta</button>
+                        <div class="dropdown-divider"></div>
+                        <button class="dropdown-item" href="#" id="MessagesButton">Mis Consultas activas y
+                            Mensajes</button>
+                        <button class="dropdown-item" href="#" id="AnsweredQueries">Consultas Respondidas</button>
                     </div>
                 </li>
             </ul>
         </div>
     </nav>
 
-    <div id="chat">     
+    <div id="pagar">
 
     </div>
     <br><br>
     <section id="formm">
-        <form id="formChat">
-            <br><textarea class="form-control" id="descrip" placeholder="Mensaje" rows="3"></textarea><br>
-            <button type="submit" class="btn btn-primary" id="send">Enviar</button>
+        <form id="formPago">
+            <br><textarea class="form-control" id="descrip" placeholder="Ingrese Monto" rows="3"></textarea><br>
+            <button type="submit" class="btn btn-primary" id="send">Pagar</button>
         </form>
     </section>
 
@@ -51,7 +53,7 @@
     <center><img style="align-items:center;" src="img/noodle.png" width="50px"></center>
 
     <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
-    <script type="text/javascript" src="/js/messagestecnico.js"></script>
+    <script type="text/javascript" src="/js/pagos.js"></script>
     <script type="text/javascript" src="/js/bootstrap.min.js"></script>
 </body>
 

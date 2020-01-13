@@ -58,10 +58,10 @@ $(document).ready(function () {
                 //se trunca la tabal del json en id, porque este no se necesita
                 response.forEach(element => {
                     if ((element["nombre"] === userLogin.val()) && (element["pass"] === passLogin.val())) {
-                        usrId = element["id"];
+                        usrId = element["tecnicoId"];
                         flag = true;
                     }
-                    delete element["id"];
+                    delete element["tecnicoId"];
                 });
                 // esta wea es la raja
                 if (flag) {
@@ -76,7 +76,7 @@ $(document).ready(function () {
                     window.localStorage.setItem("type", 1);
 
 
-                    window.location.href = "/menu.html";
+                    window.location.href = "/menutecnico.html";
                     login.fadeOut();
                     redirReg.fadeOut();
                     nav.fadeIn();
@@ -120,7 +120,7 @@ $(document).ready(function () {
                 //check if user in NOT database
                 if (!flag) {
                     $.ajax({
-                        url: 'http://localhost:8000/tecnico/',
+                        url: 'http://localhost:8000/tecnico/tecnico',
                         type: 'POST',
                         data: JSON.stringify({
                             nombre: userReg.val(),

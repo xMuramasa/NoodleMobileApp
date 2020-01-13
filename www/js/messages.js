@@ -28,6 +28,8 @@ $(document).ready(function () {
     var formChat = $("#formm");
     var descrip = $("#descrip");
 
+    descargarChats();
+    var chatDaemon = setInterval(descargarChats, 500000);
 
 
     formChat.submit(function (e) {
@@ -44,7 +46,6 @@ $(document).ready(function () {
             dataType: 'json',
             cache: false,
             success: function (respuesta) {
-                console.log("xd");
                 descargarChats();
             },
             error: function () {
@@ -56,20 +57,34 @@ $(document).ready(function () {
         return false;
     });
 
-    descargarChats();
-    var chatDaemon = setInterval(descargarChats, 500000);
-
     home.click(function () {
-        window.location.href = "/menu.html";
+        if (parseInt(window.localStorage["type"]) === 0){
+            window.location.href = "/menu.html";
+        }
+        else{
+            window.location.href = "/menutecnico.html";
+
+        }
 
     });
 
     consultas.click(function () {
-        window.location.href = "/consultas.html";
+        if (parseInt(window.localStorage["type"]) === 0){
+            window.location.href = "/consultas.html";
+        }
+        else{
+            window.location.href = "/consultastecnico.html";
+
+        }
     });
 
     qCreate.click(function () {
-           window.location.href = "/menu.html";
+        if (parseInt(window.localStorage["type"]) === 0) {
+            window.location.href = "/menu.html";
+        } else {
+            window.location.href = "/menutecnico.html";
+
+        }
     });
 
 });
@@ -79,30 +94,54 @@ function descargarChats() {
     
     $.ajax(settingsGetMensajes).done(function(response){
         response.forEach(element => {
-
+        
             if(parseInt(element["consultaId"]) === parseInt(window.localStorage["consulta"])){
                 if (element.length > 0)
                     ultimoMensaje = element[element.length - 1].id;
 
-                if (element["emisorId"] == 0) {
-                    $("#chat").prepend('<br><br>                                                                      \
+                if (parseInt(window.localStorage["type"]) === 0) {
+                    if (element["emisorId"] == 0) {
+                        $("#chat").append('<br><br>                                                                      \
+                        <div class="col-8 card float-left">                                                                   \
+                            <div class="card-body">                                                          \
+                                <h5 class="card-title">Tú</h5> \
+                                <p class="card-text">' + element["mensaje"] + '</p>                         \
+                            </div>                                                                           \
+                        </div> <br><br>                                                                               \
+                    ');
+                    } else {
+                        $("#chat").append('<br><br>                                                                      \
+                        <div class="col-8 card float-right">                                                                   \
+                            <div class="card-body">                                                          \
+                                <h5 class="card-title">Técnico</h5> \
+                                <p class="card-text">' + element["mensaje"] + '</p>                         \
+                            </div>                                                                           \
+                        </div> <br><br>                                                                               \
+                    ');
+                    }
+                } else {
+                    if (element["emisorId"] == 0) {
+                        $("#chat").append('<br><br>                                                                      \
+                    <div class="col-8 card float-right">                                                                   \
+                        <div class="card-body">                                                          \
+                            <h5 class="card-title">Cliente</h5> \
+                            <p class="card-text">' + element["mensaje"] + '</p>                         \
+                        </div>                                                                           \
+                    </div> <br><br>                                                                               \
+                ');
+                    } else {
+                        $("#chat").append('<br><br>                                                                      \
                     <div class="col-8 card float-left">                                                                   \
                         <div class="card-body">                                                          \
                             <h5 class="card-title">Tú</h5> \
-                            <p class="card-text">'+ element["mensaje"] + '</p>                         \
+                            <p class="card-text">' + element["mensaje"] + '</p>                         \
                         </div>                                                                           \
                     </div> <br><br>                                                                               \
                 ');
-                } else {
-                    $("#chat").prepend('<br><br>                                                                      \
-                    <div class="col-8 card float-right">                                                                   \
-                        <div class="card-body">                                                          \
-                            <h5 class="card-title">Técnico</h5> \
-                            <p class="card-text">'+ element["mensaje"] + '</p>                         \
-                        </div>                                                                           \
-                    </div> <br><br>                                                                               \
-                ');
+                    }
+                
                 }
+
             }
         });
     });

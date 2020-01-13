@@ -36,39 +36,43 @@ $(document).ready(function () {
 
     ///////////////////// get consultas
     $.ajax(settingsGetConsultas).done(function(respuesta){
-            var rev = respuesta.reverse();
-            rev.forEach(element => {
-                if(element["usuarioId"] === usrId){
-                    if(element["tecnicoId"] === -1){
-                        consultas.append(' <br>                                                    \
-                            <div class="card">                                                       \
-                                <div class="card-body">                                              \
-                                    <h5 class="card-title">Consulta ' + element["titulo"] + '</h5><h5 style="color:red"> Sin Responder </h5>         \
-                                    <p class = "card-text" >Fecha: ' + element["fecha"] + '</p>    \
-                                    <p class="card-text">Cliente: ' + element["usuarioId"] + '</p>    \
-                                    <p class="card-text">Técnico: ' + element["tecnicoId"] + '</p>    \
-                                    <a href="/messages.html" onclick="setConsulta(' + element["consultaId"] + ')"\
-                                    class="btn btn-primary">Ir al Chat</a>                           \
-                                </div>                                                               \
-                            </div>                                                                   \
-                        ');
-                    }
-                    else{
-                        consultas.append(' <br>                                                    \
-                            <div class="card">                                                       \
-                                <div class="card-body">                                              \
-                                    <h5 class="card-title">Consulta ' + element["titulo"] + '</h5><h5 style="color:green">  Respondida </h5>         \
-                                    <p class="card-text">Fecha: ' + element["fecha"] + '</p>    \
-                                    <p class="card-text">Cliente: ' + element["usuarioId"] + '</p>    \
-                                    <p class="card-text">Técnico: ' + element["tecnicoId"] + '</p>    \
-                                    <a href="/messages.html" onclick="setConsulta(' + element["consultaId"] + ')"\
-                                    class="btn btn-primary">Ir al Chat</a>                           \
-                                </div>                                                               \
-                            </div>                                                                   \
-                        ');
-                    }
-                }           
-            });
+        var rev = respuesta.reverse();
+        rev.forEach(element => {
+            if(element["usuarioId"] === usrId){
+                if(element["tecnicoId"] === -1){
+                    consultas.append(' <br>                                                    \
+                        <div class="card">                                                       \
+                            <div class="card-body">                                              \
+                                <h5 class="card-title">Consulta ' + element["titulo"] + '</h5><h5 style="color:red"> Sin Responder </h5>         \
+                                <p class = "card-text" >Fecha: ' + element["fecha"] + '</p>    \
+                                <p class="card-text">Cliente: ' + element["usuarioId"] + '</p>    \
+                                <p class="card-text">Técnico: ' + element["tecnicoId"] + '</p>    \
+                                <a href="/messages.html" onclick="setConsulta(' + element["consultaId"] + ')"\
+                                class="btn btn-primary">Ir al Chat</a>                           \
+                                <a href="/pagos.html" onclick="pagos(' + element["consultaId"] + ')"\
+                                class="btn btn-primary">Terminar Consulta y Pagar</a>            \
+                            </div>                                                               \
+                        </div>                                                                   \
+                    ');
+                }
+                else{
+                    consultas.append(' <br>                                                    \
+                        <div class="card">                                                       \
+                            <div class="card-body">                                              \
+                                <h5 class="card-title">Consulta ' + element["titulo"] + '</h5><h5 style="color:green">  Respondida </h5>         \
+                                <p class="card-text">Fecha: ' + element["fecha"] + '</p>    \
+                                <p class="card-text">Cliente: ' + element["usuarioId"] + '</p>    \
+                                <p class="card-text">Técnico: ' + element["tecnicoId"] + '</p>    \
+                                <a href="/messages.html" onclick="setConsulta(' + element["consultaId"] + ')"\
+                                class="btn btn-primary">Ir al Chat</a>                           \
+                                <a href="/pagos.html" onclick="pagos(' + element["consultaId"] + ')"\
+                                class="btn btn-primary">Terminar Consulta y Pagar</a>            \
+                            </div>                                                               \
+                        </div>                                                                   \
+                    ');
+                }
+            }           
+        });
     });
 
     ///////////////////// End get consultas
@@ -88,5 +92,9 @@ $(document).ready(function () {
 });
 
 function setConsulta(idConsulta) {
+    window.localStorage.setItem('consulta', idConsulta.toString());
+}
+
+function pagos(idConsulta) {
     window.localStorage.setItem('consulta', idConsulta.toString());
 }

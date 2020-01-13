@@ -13,7 +13,7 @@ $(document).ready(function () {
     let title = $("#title");
     let descrip = $("#descrip");
 
-    let consultas = $("#consultas");
+    let consultas = $("#consultasclientes");
 
     var ultimoMensaje = 0;
 
@@ -37,7 +37,7 @@ $(document).ready(function () {
     $.ajax(settingsGetConsultas).done(function(respuesta){
             respuesta.forEach(element => {
                 if(element["tecnicoId"] === usrId){
-                    consultastecnico.append(' <br>                                           \
+                    consultas.append(' <br>                                           \
                     <div class="card">                                                       \
                         <div class="card-body">                                              \
                             <h5 class="card-title">Consulta '+ element["titulo"] + '</h5>    \

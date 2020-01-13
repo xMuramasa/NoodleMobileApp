@@ -29,13 +29,13 @@ $(document).ready(function () {
     }
 
     let usrId = "";
-    let getID = function () { //¿es necesario, siendo que ya se había registrado el id en el login?
+    let getID = function () { 
         $.ajax(settingsGETall).done(function (response) {
             response.forEach(element => {
                 if (window.localStorage.getItem("token") === ""){
                     if ((element["nombre"] === window.localStorage.getItem("name")) && 
                     (element["pass"] === window.localStorage.getItem("pass"))) {
-                        usrId = parseInt(element["id"], 10);
+                        usrId = parseInt(element["tecnicoId"], 10);
                         window.localStorage.setItem("token", usrId);
                     }
                 }
