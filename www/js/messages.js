@@ -39,7 +39,7 @@ $(document).ready(function () {
             url: "http://localhost:8000/mensaje/mensaje",
             data: JSON.stringify({
                 consultaId: parseInt(window.localStorage.getItem("consulta"), 10),
-                mensaje: descrip.val(),
+                texto: descrip.val(),
                 emisorId: parseInt(window.localStorage.getItem("type"), 10)
             }),
             contentType: 'application/json',
