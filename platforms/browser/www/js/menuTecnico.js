@@ -1,62 +1,107 @@
 $(document).ready(function () {
 
-    //variables del chat
-    let chat = $("#MessagesButton");
-
     //variable del nav
     let nav = $("#nav");
     let home = $("#HomeButton");
-    let Cconsultas = $("#ClientQueries");
 
     //variables de consultas
     let query = $("#queries");
     let title = $("#title");
     let descrip = $("#descrip");
 
+    let consultasClientes = $("#consultasclientes");
 
-    // settings de postman para get, con esto funciona sin problemas
-    let settingsGETall = {
+    let settingsGetConsultas = {
         "async": true,
         "crossDomain": true,
-        "url": "http://localhost:8000/tecnico/getAll",
+        "url": "http://localhost:8000/consulta/getAll",
         "method": "GET",
         "headers": {
-            'Access-Control-Allow-Origin':'*',
             "Content-Type": "application/json",
         },
         "processData": true,
         "data": ""
     }
 
-    let usrId = "";
-    let getID = function () { 
-        $.ajax(settingsGETall).done(function (response) {
-            response.forEach(element => {
-                if (window.localStorage.getItem("token") === ""){
-                    if ((element["nombre"] === window.localStorage.getItem("name")) && 
-                    (element["pass"] === window.localStorage.getItem("pass"))) {
-                        usrId = parseInt(element["tecnicoId"], 10);
-                        window.localStorage.setItem("token", usrId);
-                    }
+    //////////////////// get consultas
+    $.ajax(settingsGetConsultas).done(function(respuesta){
+            respuesta.forEach(element => {
+                if(element["tecnicoId"] === -1){
+                    consultasClientes.append(' <br>                                          \
+                    <div class="card">                                                       \
+                        <div class="card-body">                                              \
+                            <h5 class="card-title">Consulta '+ element["titulo"] + '</h5>    \
+                            <p class="card-text">Cliente: '+ element["usuarioId"] + '</p>    \
+                            <a href="/messagesTecnico.html" onclick="setConsulta('+ element["consultaId"] + ')"\
+                            class="btn btn-primary">Ir al Chat</a>                           \
+                        </div>                                                               \
+                    </div>                                                                   \
+                    ');
                 }
             });
-        })
+    });
+
+});
+
+function setConsulta(idConsulta) {
+    window.localStorage.setItem('consulta', idConsulta);
+    var usrId = parseInt(window.localStorage.getItem("token"),10);
+
+    var settingsGetPagos = {
+        "async": true,
+        "crossDomain": true,
+        "url": "http://localhost:8000/consulta/consulta/?consultaId=" + window.localStorage["consulta"],
+        "method": "GET",
+        "headers": {
+            "Content-Type": "application/json",
+        },
+        "processData": true,
+        "data": ""
     }
-    getID();
 
+    $.ajax(settingsGetPagos).done(function (response) {
+        alert(response["descripcion"])
+        alert(response["titulo"])
+        alert(response["usuarioId"])
+        alert(usrId)
 
-    home.click(function () {
-       $("#form").fadeOut();
+        var settings = {
+            "url": "http://localhost:8000/consulta/consulta/",
+            "method": "PUT",
+            "timeout": 0,
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "data": JSON.stringify({
+                "consultaId": response["consultaId"],
+                "descripcion": response["descripcion"],
+                "fecha": response["fecha"],
+                "tecnicoId":    usrId,
+                "titulo": response["titulo"],
+                "usuarioId": response["usuarioId"]
+            }),
+        };
+        
+        $.ajax(settings).done(function (response) {
+            alert("lamao")
+        });
     });
-
-    chat.click(function () {
-        window.location.href = "/consultastecnico.html";
-    });
-
-    Cconsultas.click(function () {
-        window.location.href = "/";
-    });
-
-
-    nav.hide();
-})
+    /*
+    $.ajax({
+        type: "PUT",
+        url: "http://localhost:8000/consulta/consulta?consultaId=" + idConsulta,// api url
+        data: JSON.stringify({tecnicoId: idTecnico,
+                            consultaId: idConsulta,
+                            descripcion: desc,
+                            titulo: title, 
+                            fecha: date,
+                            usuarioId: idUsuario,
+        }),
+        dataType: 'json',
+        contentType: "application/json",
+        success: function (data) {
+            console.log("vamo shile");
+        },
+        failure: function (errMsg) { console.log("N000") }
+    });*/
+}

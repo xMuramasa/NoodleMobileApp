@@ -10,10 +10,6 @@ $(document).ready(function () {
     let descrip = $("#descrip");
 
     let consultasClientes = $("#consultasclientes");
-    var ultimoMensaje = 0;
-
-
-    var usrId = parseInt(window.localStorage.getItem("token"),10);
 
     let settingsGetConsultas = {
         "async": true,
@@ -27,7 +23,6 @@ $(document).ready(function () {
         "data": ""
     }
 
-
     //////////////////// get consultas
     $.ajax(settingsGetConsultas).done(function(respuesta){
             respuesta.forEach(element => {
@@ -37,7 +32,7 @@ $(document).ready(function () {
                         <div class="card-body">                                              \
                             <h5 class="card-title">Consulta '+ element["titulo"] + '</h5>    \
                             <p class="card-text">Cliente: '+ element["usuarioId"] + '</p>    \
-                            <a href="/messagesTecnico.html" onclick="setConsulta('+ element["consultaId"] + ',' + usrId + ',' + element["titulo"] + ',' + element["descripcion"] + ',' +  element["fecha"] + ',' + element["usuarioId"] + ')"\
+                            <a href="/messagesTecnico.html" onclick="setConsulta('+ element["consultaId"] + ')"\
                             class="btn btn-primary">Ir al Chat</a>                           \
                         </div>                                                               \
                     </div>                                                                   \
@@ -48,9 +43,50 @@ $(document).ready(function () {
 
 });
 
-function setConsulta(idConsulta, idTecnico, title, desc, date, idUsuario) {
-    window.localStorage.setItem('consulta', idConsulta.toString());
-    
+function setConsulta(idConsulta) {
+    window.localStorage.setItem('consulta', idConsulta);
+    var usrId = parseInt(window.localStorage.getItem("token"),10);
+
+    var settingsGetPagos = {
+        "async": true,
+        "crossDomain": true,
+        "url": "http://localhost:8000/consulta/consulta/?consultaId=" + window.localStorage["consulta"],
+        "method": "GET",
+        "headers": {
+            "Content-Type": "application/json",
+        },
+        "processData": true,
+        "data": ""
+    }
+
+    $.ajax(settingsGetPagos).done(function (response) {
+        alert(response["descripcion"])
+        alert(response["titulo"])
+        alert(response["usuarioId"])
+        alert(usrId)
+
+        var settings = {
+            "url": "http://localhost:8000/consulta/consulta/",
+            "method": "PUT",
+            "timeout": 0,
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "data": JSON.stringify({
+                "consultaId": response["consultaId"],
+                "descripcion": response["descripcion"],
+                "fecha": response["fecha"],
+                "tecnicoId":    usrId,
+                "titulo": response["titulo"],
+                "usuarioId": response["usuarioId"]
+            }),
+        };
+        
+        $.ajax(settings).done(function (response) {
+            alert("lamao")
+        });
+    });
+    /*
     $.ajax({
         type: "PUT",
         url: "http://localhost:8000/consulta/consulta?consultaId=" + idConsulta,// api url
@@ -67,5 +103,5 @@ function setConsulta(idConsulta, idTecnico, title, desc, date, idUsuario) {
             console.log("vamo shile");
         },
         failure: function (errMsg) { console.log("N000") }
-    });
+    });*/
 }
