@@ -60,10 +60,6 @@ function setConsulta(idConsulta) {
     }
 
     $.ajax(settingsGetPagos).done(function (response) {
-        alert(response["descripcion"])
-        alert(response["titulo"])
-        alert(response["usuarioId"])
-        alert(usrId)
 
         var settings = {
             "url": "http://localhost:8000/consulta/consulta/",
