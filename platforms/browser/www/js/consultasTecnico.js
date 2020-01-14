@@ -1,18 +1,8 @@
 $(document).ready(function () {
 
 
-    //variables del chat
-    let chat = $("#chat");
-
     //variable del nav
-    let nav = $("#nav");
     let home = $("#HomeButton");
-
-    //variabes de consultas
-    let query = $("#queries");
-    let title = $("#title");
-    let descrip = $("#descrip");
-
     let consultas = $("#consultasclientes");
 
     var usrId = parseInt(window.localStorage.getItem("token"),10);
@@ -39,7 +29,7 @@ $(document).ready(function () {
                     <div class="card-body">                                              \
                         <h5 class="card-title">Consulta '+ element["titulo"] + '</h5>    \
                         <p class="card-text">Cliente: '+ element["usuarioId"] + '</p>    \
-                        <a href="/messages.html" onclick="setConsulta('+ element["consultaId"] + ')"\
+                        <a href="/messagestecnico.html" onclick="setConsulta('+ element["consultaId"] + ')"\
                         class="btn btn-primary">Ir al Chat</a>                           \
                     </div>                                                               \
                 </div>                                                                   \
@@ -54,7 +44,7 @@ $(document).ready(function () {
         window.location.href = "/menuTecnico.html";
     });
 
-    chat.click(function () {
+    $("#MessagesButton").click(function () {
         window.location.href = "/messagestecnico.html";
     });
 

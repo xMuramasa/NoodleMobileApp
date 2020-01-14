@@ -1,3 +1,4 @@
+
 $(document).ready(function () {
 
 
@@ -56,20 +57,38 @@ $(document).ready(function () {
                     ');
                 }
                 else{
-                    consultas.append(' <br>                                                    \
-                        <div class="card">                                                       \
-                            <div class="card-body">                                              \
-                                <h5 class="card-title">Consulta ' + element["titulo"] + '</h5><h5 style="color:green">  Respondida </h5>         \
-                                <p class="card-text">Fecha: ' + element["fecha"] + '</p>    \
-                                <p class="card-text">Cliente: ' + element["usuarioId"] + '</p>    \
-                                <p class="card-text">Técnico: ' + element["tecnicoId"] + '</p>    \
-                                <a href="/messages.html" onclick="setConsulta(' + element["consultaId"] + ')"\
-                                class="btn btn-primary">Ir al Chat</a>                           \
-                                <a href="/pagos.html" onclick="setConsulta(' + element["consultaId"] + ')"\
-                                class="btn btn-primary">Terminar Consulta y Pagar</a>            \
-                            </div>                                                               \
-                        </div>                                                                   \
-                    ');
+                    if (element["visita"] === 0) {
+                        consultas.append(' <br>                                                    \
+                            <div class="card">                                                       \
+                                <div class="card-body">                                              \
+                                    <h5 class="card-title">Consulta ' + element["titulo"] + '</h5><h5 style="color:green">  Respondida </h5>         \
+                                    <p class="card-text">Fecha: ' + element["fecha"] + '</p>    \
+                                    <p class="card-text">Cliente: ' + element["usuarioId"] + '</p>    \
+                                    <p class="card-text">Técnico: ' + element["tecnicoId"] + '</p>    \
+                                    <a href="/messages.html" onclick="setConsulta(' + element["consultaId"] + ')"\
+                                    class="btn btn-primary">Ir al Chat</a>                           \
+                                    <a href="/pagos.html" onclick="setConsulta(' + element["consultaId"] + ')"\
+                                    class="btn btn-primary">Terminar Consulta y Pagar</a>            \
+                                </div>                                                               \
+                            </div>                                                                   \
+                        ');
+                    } else {
+                        consultas.append(' <br>                                                    \
+                            <div class="card">                                                       \
+                                <div class="card-body">                                              \
+                                    <h5 class="card-title">Consulta ' + element["titulo"] + '</h5><h5 style="color:green">  Respondida </h5>         \
+                                    <h5 style = "color:orange" > Visita Agendada </h5>   \
+                                    <p class="card-text">Fecha: ' + element["fecha"] + '</p>    \
+                                    <p class="card-text">Cliente: ' + element["usuarioId"] + '</p>    \
+                                    <p class="card-text">Técnico: ' + element["tecnicoId"] + '</p>    \
+                                    <a href="/messages.html" onclick="setConsulta(' + element["consultaId"] + ')"\
+                                    class="btn btn-primary">Ir al Chat</a>                           \
+                                    <a href="/pagos.html" onclick="setConsulta(' + element["consultaId"] + ')"\
+                                    class="btn btn-primary">Terminar Consulta y Pagar</a>            \
+                                </div>                                                               \
+                            </div>                                                                   \
+                        ');
+                    }
                 }
             }           
         });

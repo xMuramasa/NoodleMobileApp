@@ -53,16 +53,12 @@ $(document).ready(function () {
             </div> <br><br>                                                                      \
         ');
         }
-
-
-
     });
 
 
     formChat.submit(function (e) {
         e.preventDefault();
         let date = new Date();
-        alert(parseInt(resp["usuarioId"]))
         $.ajax({
             type: "POST",
             url: "http://localhost:8000/pago/pago",

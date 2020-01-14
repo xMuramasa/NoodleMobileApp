@@ -76,7 +76,7 @@ $(document).ready(function () {
                     window.localStorage.setItem("type", 1);
 
 
-                    window.location.href = "/menutecnico.html";
+                    window.location.href = "/menuTecnico.html";
                     login.fadeOut();
                     redirReg.fadeOut();
                     nav.fadeIn();
@@ -134,7 +134,7 @@ $(document).ready(function () {
                             window.localStorage.setItem("pass", passReg.val());
                             window.localStorage.setItem("type", 1);
 
-                            window.location.href = "/menu.html";
+                            window.location.href = "/menuTecnico.html";
                             register.fadeOut();
                         },
                         error: function (request, error) {

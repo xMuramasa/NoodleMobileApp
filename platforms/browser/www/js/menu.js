@@ -75,6 +75,7 @@ $(document).ready(function () {
 
    home.click(function () {
        $("#form").fadeOut();
+       window.location.href = "/menu.html";
     });
 
     chat.click(function () {

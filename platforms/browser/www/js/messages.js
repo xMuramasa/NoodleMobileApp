@@ -9,14 +9,53 @@ var settingsGetMensajes = {
     "processData": true,
     "data": ""
 }
+
+var settingsGetConsulta = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost:8000/consulta/consulta/?consultaId=" + parseInt(localStorage["consulta"]),
+    "method": "GET",
+    "headers": {
+        "Content-Type": "application/json",
+    },
+    "processData": true,
+    "data": ""
+}
+
 var ultimoMensaje = 0;
+
+
 
 ////////////////////// get mensajes y chat
 $(document).ready(function () {
     
+    if (parseInt(localStorage["type"]) === 1) {
+        $.ajax(settingsGetConsulta).done(function (response) {
+            var settings = {
+                "url": "http://localhost:8000/consulta/consulta",
+                "method": "PUT",
+                "timeout": 0,
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "data": JSON.stringify({
+                    "consultaId": response["consultaId"],
+                    "descripcion": response["descripcion"],
+                    "fecha": response["fecha"],
+                    "tecnicoId": parseInt(localStorage["token"], 10),
+                    "titulo": response["titulo"],
+                    "usuarioId": response["usuarioId"],
+                    "visita": response["visita"]
+                }),
+            };
+            $.ajax(settings).done(function (response) {
+                console.log("lamao")
+            });
+        });
+    }
 
     //variables del chat
-    var chat = $("#chat");
+    var formVisita = $("#xdddd");
 
     //variable del nav
     var home = $("#HomeButton");
@@ -39,7 +78,7 @@ $(document).ready(function () {
             url: "http://localhost:8000/mensaje/mensaje",
             data: JSON.stringify({
                 consultaId: parseInt(window.localStorage.getItem("consulta"), 10),
-                mensaje: descrip.val(),
+                texto: descrip.val(),
                 emisorId: parseInt(window.localStorage.getItem("type"), 10)
             }),
             contentType: 'application/json',
@@ -55,6 +94,34 @@ $(document).ready(function () {
 
         descrip.val('');
         return false;
+    });
+
+    formVisita.submit(function (e) {
+        e.preventDefault();
+        $.ajax(settingsGetConsulta).done(function (response) {
+
+            var settings = {
+                "url": "http://localhost:8000/consulta/consulta/",
+                "method": "PUT",
+                "timeout": 0,
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "data": JSON.stringify({
+                    "consultaId": response["consultaId"],
+                    "descripcion": response["descripcion"],
+                    "fecha": response["fecha"],
+                    "tecnicoId": response["tecnicoId"],
+                    "titulo": response["titulo"],
+                    "usuarioId": response["usuarioId"],
+                    "visita":1
+                }),
+            };
+
+            $.ajax(settings).done(function (response) {
+                console.log("asa")
+            });
+        });
     });
 
     home.click(function () {
@@ -105,7 +172,7 @@ function descargarChats() {
                         <div class="col-8 card float-left">                                                                   \
                             <div class="card-body">                                                          \
                                 <h5 class="card-title">Tú</h5> \
-                                <p class="card-text">' + element["mensaje"] + '</p>                         \
+                                <p class="card-text">' + element["texto"] + '</p>                         \
                             </div>                                                                           \
                         </div> <br><br>                                                                               \
                     ');
@@ -114,7 +181,7 @@ function descargarChats() {
                         <div class="col-8 card float-right">                                                                   \
                             <div class="card-body">                                                          \
                                 <h5 class="card-title">Técnico</h5> \
-                                <p class="card-text">' + element["mensaje"] + '</p>                         \
+                                <p class="card-text">' + element["texto"] + '</p>                         \
                             </div>                                                                           \
                         </div> <br><br>                                                                               \
                     ');
@@ -125,7 +192,7 @@ function descargarChats() {
                     <div class="col-8 card float-right">                                                                   \
                         <div class="card-body">                                                          \
                             <h5 class="card-title">Cliente</h5> \
-                            <p class="card-text">' + element["mensaje"] + '</p>                         \
+                            <p class="card-text">' + element["texto"] + '</p>                         \
                         </div>                                                                           \
                     </div> <br><br>                                                                               \
                 ');
@@ -134,7 +201,7 @@ function descargarChats() {
                     <div class="col-8 card float-left">                                                                   \
                         <div class="card-body">                                                          \
                             <h5 class="card-title">Tú</h5> \
-                            <p class="card-text">' + element["mensaje"] + '</p>                         \
+                            <p class="card-text">' + element["texto"] + '</p>                         \
                         </div>                                                                           \
                     </div> <br><br>                                                                               \
                 ');
