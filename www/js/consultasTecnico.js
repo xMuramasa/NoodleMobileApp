@@ -23,17 +23,35 @@ $(document).ready(function () {
     //////////////////// get consultas
     $.ajax(settingsGetConsultas).done(function(respuesta){
         respuesta.forEach(element => {
-            if(element["tecnicoId"] === usrId){
-                consultas.append(' <br>                                           \
-                <div class="card">                                                       \
-                    <div class="card-body">                                              \
-                        <h5 class="card-title">Consulta '+ element["titulo"] + '</h5>    \
-                        <p class="card-text">Cliente: '+ element["usuarioId"] + '</p>    \
-                        <a href="/messagestecnico.html" onclick="setConsulta('+ element["consultaId"] + ')"\
-                        class="btn btn-primary">Ir al Chat</a>                           \
-                    </div>                                                               \
-                </div>                                                                   \
-            ');
+            if (element["tecnicoId"] === usrId) {
+                if(element["visita"] === 1){
+                    consultas.append(' <br>                                                    \
+                            <div class="card">                                                       \
+                                <div class="card-body">                                              \
+                                    <h5 class="card-title">Consulta ' + element["titulo"] + '</h5><h5 style="color:green">  Respondida </h5>         \
+                                    <h5 style = "color:orange" > Visita Agendada </h5>   \
+                                    <p class="card-text">Fecha: ' + element["fecha"] + '</p>    \
+                                    <p class="card-text">Cliente: ' + element["usuarioId"] + '</p>    \
+                                    <a href="/messagestecnico.html" onclick="setConsulta(' + element["consultaId"] + ')"\
+                                    class="btn btn-primary">Ir al Chat</a>\
+                                </div>                                                               \
+                            </div>                                                                   \
+                        ');
+                }
+                else{
+                
+                    consultas.append(' <br>                                           \
+                        <div class="card">                                                       \
+                            <div class="card-body">                                              \
+                                <h5 class="card-title">Consulta ' + element["titulo"] + '</h5>    \
+                                <p class="card-text">Fecha: ' + element["fecha"] + '</p>    \
+                                <p class="card-text">Cliente: ' + element["usuarioId"] + '</p>    \
+                                <a href="/messagestecnico.html" onclick="setConsulta(' + element["consultaId"] + ')"\
+                                class="btn btn-primary">Ir al Chat</a>                           \
+                            </div>                                                               \
+                        </div>                                                                   \
+                    ');
+                }
             }
         });
     });
