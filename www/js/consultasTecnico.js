@@ -19,6 +19,23 @@ $(document).ready(function () {
         "data": ""
     }
 
+    var pagos = {
+        "url": "http://localhost:8000/pago/getAll",
+        "method": "GET",
+        "timeout": 0,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+    };
+
+    $.ajax(pagos).done(function (response) {
+        response.forEach(pago =>{
+            if (pago["tecnicoId"] === usrId){
+                alert("AVISO DE PAGO!\nCliente: "+pago["clienteId"]+"\nHa pagado: "+pago["monto"]+"\nPor la Consulta: "+pago["consultaId"]);
+            }
+        })
+    });
+
 
     //////////////////// get consultas
     $.ajax(settingsGetConsultas).done(function(respuesta){
